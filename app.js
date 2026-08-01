@@ -23,7 +23,7 @@ const MongoStore = require('connect-mongo').default;
 //mongoose models/tables
 const listing = require('./models/listing.js');
 const Review = require('./models/review.js');
-const User = require('./models/User.js');
+const User = require('./models/user.js');
 
 //utility functions
 const wrapAsync = require('./utils/wrapAsync.js');
