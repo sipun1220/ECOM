@@ -1,73 +1,47 @@
 <% layout('layouts/boilerplate') %>
-<div class="row mt-3">
-  <div class="col-8 offset-2">
 
-<h3>
-    Edit Listing
-</h3>
-<form method="post" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
-
-  <div class="mb-3">
-    <label for="title" class="form-label">Title:</label>
-     <input name="listing[title]" type="text" value="<%= listing.title %>" placeholder="listing title" class="form-control" required>
-     <div class="valid-feedback">
-      Looks good!
+<div class="form-shell">
+  <h3>Edit Listing</h3>
+  <form method="post" action="/listings/<%= listing._id %>?_method=PUT" novalidate class="needs-validation" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title:</label>
+      <input name="listing[title]" type="text" value="<%= listing.title %>" placeholder="Listing title" class="form-control" required>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Title should be required and should be at least 5 characters long.</div>
     </div>
-    <div class="invalid-feedback">
-      Title should be required and should be at least 5 characters long.
-      </div>
-  </div>
 
-  
-   <div class="mb-3">
-    <label for="description" class="form-label">Description:</label>
-     <textarea name="listing[description]" placeholder="listing description" class="form-control" required><%= listing.description %></textarea>
-      <div class="invalid-feedback">
-        Description should be required and should be at least 10 characters long.
-        </div>
-  </div>
-   
-   <div class="mb-3">
-    <label for="image" class="form-label">New Image:</label>
-    <input name="listing[image]" type="file"  class="form-control">
-    <div class="invalid-feedback">
-        Image URL should be valid and should start with http:// or https://. And image should be in jpg, jpeg, png or webp format.
-      </div>
-   </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description:</label>
+      <textarea name="listing[description]" placeholder="Listing description" class="form-control" required><%= listing.description %></textarea>
+      <div class="invalid-feedback">Description should be required and should be at least 10 characters long.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="image" class="form-label">New Image:</label>
+      <input name="listing[image]" type="file" class="form-control">
+      <div class="invalid-feedback">Image URL should be valid and should start with http:// or https://. And image should be in jpg, jpeg, png or webp format.</div>
+    </div>
 
     <div class="row">
+      <div class="mb-3 col-md-4">
+        <label for="price" class="form-label">Price:</label>
+        <input name="listing[price]" type="number" value="<%= listing.price %>" placeholder="Listing price" class="form-control" required>
+        <div class="invalid-feedback">Price should be valid and greater than 0.</div>
+      </div>
 
-    <div class="mb-3 col-md-4">
-      <label for="price" class="form-label">Price:</label>
-      <input name="listing[price]" type="number" value="<%= listing.price %>" placeholder="listing price" class="form-control" required>
-      <div class="invalid-feedback">
-        Price should be valid and greater than 0.
+      <div class="mb-3 col-md-8">
+        <label for="location" class="form-label">Location:</label>
+        <input name="listing[location]" type="text" value="<%= listing.location %>" placeholder="Listing location" class="form-control" required>
+        <div class="invalid-feedback">Enter a valid location. Location should be at least 3 characters long.</div>
       </div>
     </div>
-
-    <div class="mb-3 col-md-8">
-      <label for="location" class="form-label">Location:</label>
-      <input name="listing[location]" type="text" value="<%= listing.location %>" placeholder="listing location" class="form-control" required>
-      <div class="invalid-feedback">
-        Enter a valid location. Location should be at least 3 characters long.
-      </div>
-    </div>
-
-    </div>
-   
-   
 
     <div class="mb-3">
       <label for="country" class="form-label">Country:</label>
-      <input name="listing[country]" type="text" value="<%= listing.country %>" placeholder="listing country" class="form-control" required>
-      <div class="invalid-feedback">
-        Enter a valid country.
-      </div>
+      <input name="listing[country]" type="text" value="<%= listing.country %>" placeholder="Listing country" class="form-control" required>
+      <div class="invalid-feedback">Enter a valid country.</div>
     </div>
 
-
-    <button type="submit" class="btn btn-dark edit-btn">edit listing</button>
-</form>
-    
-  </div>
+    <button type="submit" class="btn edit-btn">Edit Listing</button>
+  </form>
 </div>

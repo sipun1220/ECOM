@@ -1,116 +1,97 @@
 <% layout('layouts/boilerplate') %>
-<div class="row mt-3 mb-3">
-  <div class="col-8 offset-3">
 
-<h3>
-   <%= listing.title %>
-</h3>
-  </div>
+<div class="show-page">
+  <div class="show-layout">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-7">
+        <img src="<%= listing.image.url %>" class="show-image" alt="listing image">
+      </div>
 
-<div class="card col-6 offset-3 show-card listing-card">
-  <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing image">
-  <div class="card-body">
+      <div class="col-lg-5">
+        <p class="eyebrow">Featured stay</p>
+        <h1 class="detail-title"><%= listing.title %></h1>
 
-    <p class="card-text">
-      Owned by:-
-       <b><i><%= listing.owner.username %></i></b>
-    </p>
- <p class="card-text">
-      <%= listing.description %>
-    </p>
-    <p class="card-text">
-       &#8377; <%= listing.price.toLocaleString("en-IN") %>
-    </p>
-    <p class="card-text">
-        <%= listing.location %> <br>
-        <%= listing.country %> <br>
-    </p>
+        <div class="detail-meta">
+          <span class="meta-pill"><i class="fa-solid fa-location-dot"></i> <%= listing.location %></span>
+          <span class="meta-pill"><i class="fa-solid fa-earth-americas"></i> <%= listing.country %></span>
+        </div>
 
-  </div>
-</div>
-<% if (currentUser && currentUser._id.equals(listing.owner._id)) { %>
-<div class="btns">
-<a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
-<form method="post" action="/listings/<%= listing._id %>?_method=DELETE">
-    <button class="btn btn-dark offset-5">Delete</button>
-</form>
-</div>
-<% } %>
+        <p class="detail-price">&#8377; <%= listing.price.toLocaleString("en-IN") %> / night</p>
+        <p class="detail-desc"><%= listing.description %></p>
 
+        <p class="card-text mb-3">
+          Owned by <b><i><%= listing.owner.username %></i></b>
+        </p>
 
-
-<div class=" col-8 offset-3 mb-3">
-<hr>
-<% if(currentUser) { %>
-
-  <h4>Leave a Review</h4>
-  <form method ="post" action="/listings/<%= listing._id %>/reviews" novalidate class="needs-validation">
-  
-<div class="mb-3 mt-3">
-   <label for="rating" class="form-label">Reting:</label>
-  <fieldset class="starability-slot">
-    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
- 
-
-  <input type="radio" id="first-rate1" name="review[rating]" value="1" />
-  <label for="first-rate1" title="Terrible">1 star</label>
-
-  <input type="radio" id="first-rate2" name="review[rating]" value="2" />
-  <label for="first-rate2" title="Not good">2 stars</label>
-
-  <input type="radio" id="first-rate3" name="review[rating]" value="3" />
-  <label for="first-rate3" title="Average">3 stars</label>
-
-  <input type="radio" id="first-rate4" name="review[rating]" value="4" />
-  <label for="first-rate4" title="Very good">4 stars</label>
-
-  <input type="radio" id="first-rate5" name="review[rating]" value="5" />
-  <label for="first-rate5" title="Amazing">5 stars</label>
-</fieldset>
-
-</div>
-
-
-    <div class="mb-3 mt-3">
-         <label for="comment" class="form-label">comments:</label>
-         <textarea id="comment" name="review[comment]" cols="38" rows="5" class="form-control" required ></textarea>
-         <div class="valid-feedback">
-      Looks good!
-    </div>
-
-    <div class="invalid-feedback">
-      Comment should be required and should be at least 10 characters long.
+        <% if (currentUser && currentUser._id.equals(listing.owner._id)) { %>
+          <div class="btns">
+            <a href="/listings/<%= listing._id %>/edit" class="btn action-btn">Edit</a>
+            <form method="post" action="/listings/<%= listing._id %>?_method=DELETE">
+              <button class="btn action-btn">Delete</button>
+            </form>
+          </div>
+        <% } %>
       </div>
     </div>
-     <button class="btn btn-outline-dark">Submit</button>
-  </form>
-   <hr />
-<% } %>
+  </div>
 
- 
-  <p> <b>All Reviews:-</b></p>
+  <div class="review-block">
+    <% if(currentUser) { %>
+      <h4 class="mb-3">Leave a Review</h4>
+      <form method="post" action="/listings/<%= listing._id %>/reviews" novalidate class="needs-validation">
+        <div class="mb-3 mt-3">
+          <label for="rating" class="form-label">Rating:</label>
+          <fieldset class="starability-slot">
+            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
 
+            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+            <label for="first-rate1" title="Terrible">1 star</label>
 
-<div class="row">
-  <% for(let review of listing.reviews) { %>
-    <div class="card col-5 ms-3 mb-3">
-         <div class="card-body">
+            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+            <label for="first-rate2" title="Not good">2 stars</label>
 
-           <h5 class="card-title">@<%= review.author.username %></h5>
-            <p class="starability-result" data-rating="<%= review.rating %>">  </p>
-               <p class="card-text"> <%= review.comment %> </p>
-           
+            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+            <label for="first-rate3" title="Average">3 stars</label>
 
-         </div>
-         <form class="mb-3 mt-2" method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
-          <button class="btn btn-sm btn-dark">Delete</button>
-         </form>
-      </div>
-<% } %>
-</div>
+            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+            <label for="first-rate4" title="Very good">4 stars</label>
 
+            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+            <label for="first-rate5" title="Amazing">5 stars</label>
+          </fieldset>
+        </div>
 
+        <div class="mb-3 mt-3">
+          <label for="comment" class="form-label">Comments:</label>
+          <textarea id="comment" name="review[comment]" cols="38" rows="5" class="form-control" required></textarea>
+          <div class="valid-feedback">Looks good!</div>
+          <div class="invalid-feedback">Comment should be required and should be at least 10 characters long.</div>
+        </div>
 
-</div>
-   
+        <button class="btn submit-btn">Submit</button>
+      </form>
+      <hr />
+    <% } %>
+
+    <p class="mb-3"><b>All Reviews</b></p>
+
+    <div class="row g-3">
+      <% for(let review of listing.reviews) { %>
+        <div class="col-md-6">
+          <div class="card review-card h-100">
+            <div class="card-body">
+              <h5 class="card-title">@<%= review.author.username %></h5>
+              <p class="starability-result" data-rating="<%= review.rating %>"></p>
+              <p class="card-text"><%= review.comment %></p>
+            </div>
+            <div class="card-footer bg-white border-0 pt-0 pb-3 px-3">
+              <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                <button class="btn btn-sm btn-dark">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </div>
 </div>

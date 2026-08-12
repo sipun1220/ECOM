@@ -1,74 +1,47 @@
 <% layout('layouts/boilerplate') %>
-<div class="row mt-3 mb-3">
-  <div class="col-8 offset-2">
-    <br>
-<h3>
-    Create a New Listing
-</h3>
-<form method="post" action="/listings"  novalidate class="needs-validation" enctype="multipart/form-data">
 
-  <div class="mb-3">
- <label for="title" class="form-label">Title:</label>
-  <input name="listing[title]" type="text" placeholder="Add a catchy title" class="form-control" required>
-  <div class="valid-feedback">
-      Looks good!
+<div class="form-shell">
+  <h3>Create a New Listing</h3>
+  <form method="post" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title:</label>
+      <input name="listing[title]" type="text" placeholder="Add a catchy title" class="form-control" required>
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">Title should be required and should be at least 5 characters long.</div>
     </div>
-    <div class="invalid-feedback">
-      Title should be required and should be at least 5 characters long.
-      </div>
-  </div>
-  
-  <div class="mb-3">
-     <label for="description" class="form-label">Description:</label>
-        <textarea name="listing[description]" placeholder="Add a detailed description" class="form-control" required ></textarea>
-        <div class="invalid-feedback">
-       Description should be required and should be at least 10 characters long.
-      </div>
-  </div>
-  
-   <div class="mb-3">
-    <label for="image" class="form-label">upload listing image:</label>
-    <input name="listing[image]" type="file"  class="form-control" required>
-    <div class="invalid-feedback">
-        Image URL should be valid and should start with http:// or https://. And image should be in jpg, jpeg, png or webp format.
-      </div>
-   </div>
 
+    <div class="mb-3">
+      <label for="description" class="form-label">Description:</label>
+      <textarea name="listing[description]" placeholder="Add a detailed description" class="form-control" required></textarea>
+      <div class="invalid-feedback">Description should be required and should be at least 10 characters long.</div>
+    </div>
 
+    <div class="mb-3">
+      <label for="image" class="form-label">Upload listing image:</label>
+      <input name="listing[image]" type="file" class="form-control" required>
+      <div class="invalid-feedback">Image URL should be valid and should start with http:// or https://. And image should be in jpg, jpeg, png or webp format.</div>
+    </div>
 
     <div class="row">
-
-     <div class="mb-3 col-md-4">
-    <label for="price" class="form-label">Price:</label>
-    <input name="listing[price]"  placeholder="1200" class="form-control" required>
-      <div class="invalid-feedback">
-        Price should be valid and greater than 0.
+      <div class="mb-3 col-md-4">
+        <label for="price" class="form-label">Price:</label>
+        <input name="listing[price]" placeholder="1200" class="form-control" required>
+        <div class="invalid-feedback">Price should be valid and greater than 0.</div>
       </div>
-   </div>
 
-
-   <div class="mb-3 col-md-8">
-    <label for="location" class="form-label">Location:</label>
-    <input name="listing[location]" type="text" placeholder="india" class="form-control" required>
-    <div class="invalid-feedback">
-        Enter a valid location. Location should be at least 3 characters long.
+      <div class="mb-3 col-md-8">
+        <label for="location" class="form-label">Location:</label>
+        <input name="listing[location]" type="text" placeholder="India" class="form-control" required>
+        <div class="invalid-feedback">Enter a valid location. Location should be at least 3 characters long.</div>
       </div>
-   </div>
-
     </div>
-   
 
-   
     <div class="mb-3">
       <label for="country" class="form-label">Country:</label>
-      <input name="listing[country]" type="text" placeholder="Jaipur,Rajasthana" class="form-control" required>
-      <div class="invalid-feedback">
-        Enter a valid country.
-      </div>
+      <input name="listing[country]" type="text" placeholder="Jaipur, Rajasthan" class="form-control" required>
+      <div class="invalid-feedback">Enter a valid country.</div>
     </div>
-   <br>
-    <button class="btn btn-dark add-btn">Add</button>
-    
-</form>
-</div>
+
+    <button class="btn add-btn">Add</button>
+  </form>
 </div>
